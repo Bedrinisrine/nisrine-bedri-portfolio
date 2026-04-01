@@ -9,6 +9,7 @@ const NAV = [
   { to: '/projects', label: 'Projects' },
   { to: '/experience', label: 'Experience' },
   { to: '/certificates', label: 'Certificates' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {

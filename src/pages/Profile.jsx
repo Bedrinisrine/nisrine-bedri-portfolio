@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import SectionHeader from '../components/SectionHeader'
 import ProfilePhotoExpandable from '../components/ProfilePhotoExpandable'
 import { LINKEDIN, INSTAGRAM } from '../constants/social'
@@ -100,6 +101,14 @@ export default function Profile({ titleAs = 'h1' }) {
               >
                 @nissrine_bedri
               </a>
+            </li>
+            <li className="pt-2">
+              <Link
+                to="/contact"
+                className="inline-flex min-h-[40px] items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+              >
+                Send a message
+              </Link>
             </li>
           </ul>
         </aside>

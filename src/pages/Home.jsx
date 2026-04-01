@@ -78,9 +78,30 @@ export default function Home() {
 
       <div
         id="certificates"
-        className="scroll-mt-28 border-t border-slate-200/80 pb-4 pt-16 sm:pt-20"
+        className="scroll-mt-28 border-t border-slate-200/80 pt-16 sm:pt-20"
       >
         <Certificates titleAs="h2" />
+      </div>
+
+      <div
+        id="contact"
+        className="scroll-mt-28 border-t border-slate-200/80 pb-4 pt-16 sm:pt-20"
+      >
+        <div className="rounded-2xl border border-slate-200/90 bg-gradient-to-br from-rose-50/80 via-white to-slate-50 p-8 text-center shadow-card sm:p-10">
+          <p className="text-xs font-semibold uppercase tracking-eyebrow text-rose-600">Contact</p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Let&apos;s talk
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-slate-600">
+            Opportunities, collaborations, or questions—send a message and I&apos;ll get back to you.
+          </p>
+          <Link
+            to="/contact"
+            className="mt-6 inline-flex min-h-[44px] min-w-[180px] items-center justify-center rounded-xl bg-slate-900 px-8 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+          >
+            Open contact form
+          </Link>
+        </div>
       </div>
     </div>
   )

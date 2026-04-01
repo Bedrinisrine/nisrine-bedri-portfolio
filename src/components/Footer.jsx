@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { publicUrl } from '../utils/publicUrl'
 import { LINKEDIN, INSTAGRAM } from '../constants/social'
 import ProfilePhotoExpandable from './ProfilePhotoExpandable'
@@ -71,6 +72,11 @@ export default function Footer() {
                 >
                   nisrinebedri@gmail.com
                 </a>
+              </li>
+              <li>
+                <Link to="/contact" className="text-rose-400/90 transition hover:text-rose-300">
+                  Contact form
+                </Link>
               </li>
               <li className="text-slate-500">Casablanca, Morocco</li>
             </ul>

@@ -5,6 +5,7 @@ import Profile from './pages/Profile'
 import Projects from './pages/Projects'
 import Experience from './pages/Experience'
 import Certificates from './pages/Certificates'
+import Contact from './pages/Contact'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/certificates" element={<Certificates />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
