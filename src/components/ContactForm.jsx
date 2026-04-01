@@ -1,5 +1,5 @@
-import { useState, useMemo, useCallback } from 'react'
-import { CONTACT_EMAIL, whatsappUrlWithText } from '../constants/contact'
+import { useState, useMemo } from 'react'
+import { whatsappUrlWithText } from '../constants/contact'
 
 const WEB3_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
@@ -14,17 +14,6 @@ export default function ContactForm() {
     const body = `Hi Nisrine,\n\nI'm ${name || '[your name]'} (${email || 'email'}).\n\n${message || '[your message]'}\n`
     return whatsappUrlWithText(body)
   }, [name, email, message])
-
-  /** Outside <form> + sync handler — avoids Chrome blocking mailto: inside form / SPA */
-  const openMailto = useCallback(() => {
-    const subject = encodeURIComponent(`Portfolio: message from ${name || 'visitor'}`)
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)
-    window.location.assign(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`)
-  }, [name, email, message])
-
-  const openWhatsApp = useCallback(() => {
-    window.open(whatsappHref, '_blank', 'noopener,noreferrer')
-  }, [whatsappHref])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -55,11 +44,11 @@ export default function ContactForm() {
         setMessage('')
       } else {
         setStatus('error')
-        setErrorDetail(data.message || 'Something went wrong. Try WhatsApp or email.')
+        setErrorDetail(data.message || 'Something went wrong. Try WhatsApp.')
       }
     } catch {
       setStatus('error')
-      setErrorDetail('Network error. Try WhatsApp or email.')
+      setErrorDetail('Network error. Try WhatsApp.')
     }
   }
 
@@ -67,7 +56,7 @@ export default function ContactForm() {
     <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-card sm:p-8">
       <h2 className="text-lg font-semibold text-slate-900">Send a message</h2>
       <p className="mt-2 text-sm text-slate-600">
-        Write your message, then send it with WhatsApp or your email app.
+        Write your message, then send it with WhatsApp.
         {WEB3_KEY && (
           <>
             {' '}
@@ -132,12 +121,12 @@ export default function ContactForm() {
         )}
         {status === 'error' && (
           <p className="rounded-xl border border-red-200/90 bg-red-50 px-4 py-3 text-sm text-red-900" role="alert">
-            {errorDetail || 'Could not send. Try WhatsApp or email.'}
+            {errorDetail || 'Could not send. Try WhatsApp.'}
           </p>
         )}
 
-        {WEB3_KEY && (
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          {WEB3_KEY && (
             <button
               type="submit"
               disabled={status === 'submitting'}
@@ -145,31 +134,17 @@ export default function ContactForm() {
             >
               {status === 'submitting' ? 'Sending…' : 'Send by email'}
             </button>
-          </div>
-        )}
+          )}
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl border border-emerald-600/40 bg-emerald-50 px-6 py-3 text-sm font-semibold text-emerald-900 transition hover:bg-emerald-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+          >
+            Open in WhatsApp
+          </a>
+        </div>
       </form>
-
-      {/* Not inside <form> — mailto:/window.open must run from a direct tap/click */}
-      <div
-        className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
-        role="group"
-        aria-label="Send with WhatsApp or your email app"
-      >
-        <button
-          type="button"
-          onClick={openWhatsApp}
-          className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl border border-emerald-600/40 bg-emerald-50 px-6 py-3 text-sm font-semibold text-emerald-900 transition hover:bg-emerald-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-        >
-          Open in WhatsApp
-        </button>
-        <button
-          type="button"
-          onClick={openMailto}
-          className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl border border-slate-300/90 bg-white px-6 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-rose-300 hover:bg-rose-50/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
-        >
-          Send with email app
-        </button>
-      </div>
     </div>
   )
 }
