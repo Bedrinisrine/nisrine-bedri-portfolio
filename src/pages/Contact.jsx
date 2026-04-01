@@ -8,7 +8,7 @@ export default function Contact({ titleAs = 'h1' }) {
         titleAs={titleAs}
         eyebrow="Hello"
         title="Contact"
-        subtitle="Send a message for opportunities, collaborations, or questions—I read every note."
+        subtitle="Your corner to say hello—about work, ideas, or anything in between. I&apos;ll get back to you."
       />
       <ContactForm />
     </section>

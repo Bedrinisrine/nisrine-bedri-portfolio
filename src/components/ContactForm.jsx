@@ -64,10 +64,11 @@ export default function ContactForm() {
   return (
     <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-card sm:p-8">
       <h2 className="text-lg font-semibold text-slate-900">Send a message</h2>
-      <p className="mt-2 text-sm text-slate-600">
-        Write your message, then use <span className="font-medium text-slate-800">Send by email</span>{' '}
-        {WEB3_KEY ? '(delivered from the site)' : '(opens your email app to nisrinebedri@gmail.com)'} or{' '}
-        <span className="font-medium text-slate-800">WhatsApp</span>.
+      <p className="mt-3 text-sm leading-relaxed text-slate-600">
+        <span className="font-medium text-slate-800">Hey—glad you&apos;re here.</span> If you want to talk
+        opportunities, a project, or just say hi, this is the place. Write a few lines below, then reach
+        out with <span className="font-medium text-slate-800">Send by email</span> or{' '}
+        <span className="font-medium text-slate-800">WhatsApp</span>—I read everything that lands in my inbox.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
