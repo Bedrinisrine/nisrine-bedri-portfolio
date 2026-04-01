@@ -1,17 +1,87 @@
+import { Link } from 'react-router-dom'
+import Profile from './Profile'
+import Experience from './Experience'
+import Certificates from './Certificates'
+import ProjectList from '../components/ProjectList'
+import SectionHeader from '../components/SectionHeader'
+import { publicUrl } from '../utils/publicUrl'
+import { cvButtonClass } from '../constants/ui'
+
 export default function Home() {
   return (
-    <section className="hero-bg grid gap-6 text-center py-20">
-      <h1 className="text-4xl font-extrabold tracking-tight text-black">Hello, I’m Nisrine Bedri</h1>
-      <p className="max-w-2xl mx-auto leading-7 text-gray-900/90">
-        Recently graduated MIAGE engineer with hands-on experience in full‑stack development
-        and artificial intelligence solutions. Eager to apply and expand technical expertise in
-        a dynamic and innovative work environment.
-      </p>
-      <div className="flex justify-center gap-3">
-        <a href="/cv.pdf" download className="px-5 py-2.5 rounded-md bg-pink-600 text-white hover:bg-pink-700 shadow-sm">Download CV</a>
-        <a href="/projects" className="px-5 py-2.5 rounded-md border border-pink-300 text-pink-700 bg-white hover:bg-pink-50">View Projects</a>
+    <div className="space-y-0">
+      <section
+        id="home"
+        className="scroll-reveal animate-scale-in relative overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-900 text-center shadow-soft"
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{ backgroundImage: `url(${publicUrl('/images/hero.jpg')})` }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-900/85 to-slate-950/95"
+          aria-hidden
+        />
+        <div className="relative z-10 px-4 py-20 sm:px-8 sm:py-28">
+          <p className="animate-fade-up text-xs font-semibold uppercase tracking-eyebrow text-rose-300/95">
+            Software engineering · Artificial intelligence
+          </p>
+          <h1 className="animate-fade-up anim-delay-1 mt-4 text-4xl font-semibold tracking-tight sm:text-5xl text-balance">
+            <span className="title-wave inline-block">Hello, I&apos;m Nisrine Bedri</span>
+          </h1>
+          <p className="animate-fade-up anim-delay-2 mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-slate-200/95 sm:text-base">
+            Recently graduated MIAGE engineer with hands-on experience in full-stack development and
+            artificial intelligence. I focus on clear architecture, solid UX, and shipping products
+            that scale.
+          </p>
+          <p className="animate-fade-up anim-delay-3 mx-auto mt-4 max-w-xl text-sm text-slate-400">
+            Read it like a single story top to bottom—or jump straight to any chapter from the menu
+            when you are short on time.
+          </p>
+          <div className="animate-fade-up anim-delay-4 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <a
+              href={`${import.meta.env.BASE_URL}cv.pdf`}
+              download
+              className={`min-w-[160px] focus-visible:ring-offset-slate-900 ${cvButtonClass}`}
+            >
+              Download CV
+            </a>
+            <Link
+              to="/projects"
+              className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            >
+              View projects
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <div id="profile" className="scroll-mt-28 pt-16 sm:pt-20">
+        <Profile titleAs="h2" />
       </div>
-    </section>
+
+      <div
+        id="projects"
+        className="scroll-mt-28 border-t border-slate-200/80 pt-16 sm:pt-20"
+      >
+        <SectionHeader titleAs="h2" eyebrow="Work" title="Selected projects" />
+        <ProjectList />
+      </div>
+
+      <div
+        id="experience"
+        className="scroll-mt-28 border-t border-slate-200/80 pt-16 sm:pt-20"
+      >
+        <Experience titleAs="h2" />
+      </div>
+
+      <div
+        id="certificates"
+        className="scroll-mt-28 border-t border-slate-200/80 pb-4 pt-16 sm:pt-20"
+      >
+        <Certificates titleAs="h2" />
+      </div>
+    </div>
   )
 }
-

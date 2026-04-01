@@ -1,88 +1,127 @@
+import { publicUrl } from '../utils/publicUrl'
+import { LINKEDIN, INSTAGRAM } from '../constants/social'
+import ProfilePhotoExpandable from './ProfilePhotoExpandable'
+
 export default function Footer() {
   return (
-    <footer className="bg-pink-100 border-t border-pink-200 py-8 mt-16">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Profile Section */}
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center overflow-hidden">
-              <img 
-                src="/images/profile.jpg" 
-                alt="Nisrine Bedri" 
-                className="w-full h-full object-cover"
+    <footer className="mt-auto border-t border-slate-800/80 bg-slate-950 text-slate-400">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div className="grid gap-10 md:grid-cols-[1.1fr_1fr_auto] md:items-start">
+          <div className="flex gap-4">
+            <ProfilePhotoExpandable
+              src={publicUrl('/images/profile.jpg')}
+              alt="Nisrine Bedri"
+              buttonClassName="h-14 w-14 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/10 transition hover:ring-rose-400/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+            >
+              <img
+                src={publicUrl('/images/profile.jpg')}
+                alt=""
+                className="h-full w-full object-cover"
                 onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
+                  e.target.style.display = 'none'
                 }}
               />
-              <span className="text-2xl font-bold text-pink-700 hidden">NB</span>
-            </div>
+            </ProfilePhotoExpandable>
             <div>
-              <h3 className="text-xl font-bold text-gray-900">Nisrine Bedri</h3>
-              <p className="text-sm text-gray-600">Software Engineer & AI Engineer</p>
+              <p className="text-lg font-semibold tracking-tight text-white">Nisrine Bedri</p>
+              <p className="mt-1 text-sm text-slate-400">
+                Full-stack &amp; AI-focused engineer. Building reliable products end to end.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                <a
+                  href={LINKEDIN}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-rose-400/90 transition hover:text-rose-300"
+                >
+                  LinkedIn
+                </a>
+                <span className="text-slate-600" aria-hidden>
+                  ·
+                </span>
+                <a
+                  href={INSTAGRAM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-rose-400/90 transition hover:text-rose-300"
+                >
+                  Instagram
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Contact Info */}
-          <div className="text-center md:text-right">
-            <p className="text-sm text-gray-600 mb-2">Get in touch</p>
-            <p className="text-sm text-gray-700">+212 6 17 59 43 33</p>
-            <p className="text-sm text-gray-700">nisrinebedri@gmail.com</p>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-eyebrow text-slate-500">
+              Contact
+            </p>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <a
+                  href="tel:+212617594333"
+                  className="text-slate-300 transition hover:text-white"
+                >
+                  +212 6 17 59 43 33
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:nisrinebedri@gmail.com"
+                  className="text-slate-300 transition hover:text-white"
+                >
+                  nisrinebedri@gmail.com
+                </a>
+              </li>
+              <li className="text-slate-500">Casablanca, Morocco</li>
+            </ul>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
-            <a 
-              href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQE52gGteJK_FwAAAZneYXUo-G92EB7O-aRymqaIvUFPxgAy--QLNhDD1nVXpxKGFirVI-1M8grFq7ND3rHvefmCGkHoj9RZJ1UpzLfzr5ot2tjuFMGCuLnpKNsrzZyC8UEyzuk=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fnisrine-bedri-ba8514201%2F" 
-              target="_blank" 
-              rel="noreferrer"
-              className="p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
-              title="LinkedIn"
+          <div className="flex flex-wrap gap-2 md:justify-end">
+            <a
+              href={LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-slate-300 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/60"
+              title="LinkedIn — Nisrine Bedri"
+              aria-label="LinkedIn profile"
             >
-              <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
             </a>
-            
-            <a 
-              href="https://www.instagram.com/nisrinebedri" 
-              target="_blank" 
-              rel="noreferrer"
-              className="p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
-              title="Instagram"
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-slate-300 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/60"
+              title="Instagram — @nissrine_bedri"
+              aria-label="Instagram profile"
             >
-              <svg className="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.281h-1.563v-1.563h1.563v1.563zm-3.262 2.344c.49 0 .98.49.98 1.297 0 .807-.49 1.297-.98 1.297s-.98-.49-.98-1.297c0-.807.49-1.297.98-1.297zm5.229 4.688c0 2.026-1.297 3.323-3.323 3.323s-3.323-1.297-3.323-3.323 1.297-3.323 3.323-3.323 3.323 1.297 3.323 3.323z"/>
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
               </svg>
             </a>
-            
-            <a 
-              href="https://www.facebook.com/nisrinebedri" 
-              target="_blank" 
-              rel="noreferrer"
-              className="p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
+            <a
+              href="https://www.facebook.com/nisrinebedri"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-slate-300 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/60"
               title="Facebook"
+              aria-label="Facebook profile"
             >
-              <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            
-            <a 
-              href="tel:+212617594333" 
-              className="p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
-              title="Phone"
-            >
-              <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
             </a>
           </div>
         </div>
-        
-        <div className="mt-6 pt-6 border-t border-pink-200 text-center">
-          <p className="text-sm text-gray-600">
-            © 2025 Nisrine Bedri. All rights reserved.
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
+          <p className="text-xs text-slate-500">
+            © {new Date().getFullYear()} Nisrine Bedri. All rights reserved.
+          </p>
+          <p className="text-xs text-slate-600">
+            React · Responsive &amp; performance-conscious
           </p>
         </div>
       </div>
