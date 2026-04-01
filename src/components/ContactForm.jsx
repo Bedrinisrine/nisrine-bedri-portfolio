@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { whatsappUrlWithText } from '../constants/contact'
+import { CONTACT_EMAIL, whatsappUrlWithText } from '../constants/contact'
 
 const WEB3_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
@@ -15,10 +15,19 @@ export default function ContactForm() {
     return whatsappUrlWithText(body)
   }, [name, email, message])
 
+  const mailtoHref = useMemo(() => {
+    const subject = `Portfolio: message from ${name || 'visitor'}`
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  }, [name, email, message])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrorDetail('')
-    if (!WEB3_KEY) return
+    if (!WEB3_KEY) {
+      window.location.href = mailtoHref
+      return
+    }
     setStatus('submitting')
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -56,13 +65,9 @@ export default function ContactForm() {
     <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-card sm:p-8">
       <h2 className="text-lg font-semibold text-slate-900">Send a message</h2>
       <p className="mt-2 text-sm text-slate-600">
-        Write your message, then send it with WhatsApp.
-        {WEB3_KEY && (
-          <>
-            {' '}
-            You can also use <span className="font-medium text-slate-800">Send by email</span> below.
-          </>
-        )}
+        Write your message, then use <span className="font-medium text-slate-800">Send by email</span>{' '}
+        {WEB3_KEY ? '(delivered from the site)' : '(opens your email app to nisrinebedri@gmail.com)'} or{' '}
+        <span className="font-medium text-slate-800">WhatsApp</span>.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -126,15 +131,13 @@ export default function ContactForm() {
         )}
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-          {WEB3_KEY && (
-            <button
-              type="submit"
-              disabled={status === 'submitting'}
-              className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {status === 'submitting' ? 'Sending…' : 'Send by email'}
-            </button>
-          )}
+          <button
+            type="submit"
+            disabled={status === 'submitting'}
+            className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {status === 'submitting' ? 'Sending…' : 'Send by email'}
+          </button>
           <a
             href={whatsappHref}
             target="_blank"
