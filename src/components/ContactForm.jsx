@@ -147,9 +147,9 @@ export default function ContactForm() {
             href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Portfolio: message from ${name || 'visitor'}`)}&body=${encodeURIComponent(
               `Name: ${name}\nEmail: ${email}\n\n${message}`
             )}`}
-            className="text-center text-sm font-medium text-rose-700 underline decoration-rose-300 underline-offset-2 hover:text-rose-800 sm:ml-1"
+            className="inline-flex min-h-[44px] min-w-[160px] items-center justify-center rounded-xl border border-slate-300/90 bg-white px-6 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-rose-300 hover:bg-rose-50/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
           >
-            Open email app instead
+            Send with email app
           </a>
         </div>
       </form>
